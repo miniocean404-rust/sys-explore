@@ -46,6 +46,5 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true
   },
-  "include": ["*.ts"],
-  "exclude": ["*.js", "src/binding.d.ts"]
+  "include": ["__tests__/*"],
 }

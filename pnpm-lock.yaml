@@ -7,6 +7,13 @@ settings:
 importers:
 
   packages/explore:
+    dependencies:
+      dedent:
+        specifier: 1.7.1
+        version: 1.7.1
+      es-toolkit:
+        specifier: 1.44.0
+        version: 1.44.0
     devDependencies:
       '@napi-rs/cli':
         specifier: ^3.5.1
@@ -674,6 +681,14 @@ packages:
       supports-color: '*'
     peerDependenciesMeta:
       supports-color:
+        optional: true
+
+  dedent@1.7.1:
+    resolution: {integrity: sha512-9JmrhGZpOlEgOLdQgSm0zxFaYoQon408V1v49aqTWuXENVlnCuY9JBZcXZiCsZQWDjTm5Qf/nIvAy77mXDAjEg==}
+    peerDependencies:
+      babel-plugin-macros: ^3.1.0
+    peerDependenciesMeta:
+      babel-plugin-macros:
         optional: true
 
   define-data-property@1.1.4:
@@ -1762,6 +1777,8 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+
+  dedent@1.7.1: {}
 
   define-data-property@1.1.4:
     dependencies:
