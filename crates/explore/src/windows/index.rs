@@ -5,13 +5,14 @@
 
 use crate::dto::app_info::{AppInfo, Platform};
 use crate::windows::explore::{get_path_from_explore_view, get_sub_explore};
-use crate::windows::utils::{get_foreground_window, get_window_exec_path, get_window_title};
+use crate::windows::utils::{get_foreground_window, get_window_exec_path, get_window_process_id, get_window_title};
 
 // 获取资源管理器的路径
 pub unsafe fn get_explore_info() -> anyhow::Result<AppInfo> {
     let infos = get_sub_explore()?;
     let foreground_window = unsafe { get_foreground_window() };
     let foreground_title = unsafe { get_window_title(foreground_window) };
+    let foreground_process_id = unsafe { get_window_process_id(foreground_window) };
     let exec = unsafe { get_window_exec_path(foreground_window) }?;
 
     let mut app_info = AppInfo {
@@ -26,9 +27,11 @@ pub unsafe fn get_explore_info() -> anyhow::Result<AppInfo> {
     infos.iter().try_for_each(|info| {
         let dir = get_path_from_explore_view(&info.shell_browser)?;
 
-        let title = unsafe { get_window_title(info.hwnd) };
+        let process_id = unsafe { get_window_process_id(info.hwnd) };
 
-        if foreground_title == title {
+        println!("dir: {} foreground_pid={} info_pid={}", dir, foreground_process_id, process_id);
+
+        if foreground_process_id == process_id {
             app_info.dir = dir;
         }
 

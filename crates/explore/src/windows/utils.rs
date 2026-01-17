@@ -106,11 +106,16 @@ pub unsafe fn get_window_program_path(window: HWND) -> String {
     String::from_utf16_lossy(&path[..path_len as usize])
 }
 
+// 获取窗口的进程 ID
+pub unsafe fn get_window_process_id(window: HWND) -> u32 {
+    let mut process_id = 0;
+    unsafe { GetWindowThreadProcessId(window, Some(&mut process_id)) };
+    process_id
+}
+
 // 根据句柄获取窗口的可执行文件路径
 pub unsafe fn get_window_exec_path(window: HWND) -> anyhow::Result<String> {
-    let mut process_id = 0;
-
-    unsafe { GetWindowThreadProcessId(window, Some(&mut process_id)) };
+    let process_id = unsafe { get_window_process_id(window) };
     let process_handle = unsafe {
         OpenProcess(
             PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
