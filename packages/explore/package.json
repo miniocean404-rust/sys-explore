@@ -5,6 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "browser.js",
+  "type": "module",
   "keywords": [
     "napi-rs",
     "NAPI",
@@ -44,10 +45,9 @@
   "scripts": {
     "build:napi-dev": "tsx build/index.ts",
     "build:napi": "tsx build/index.ts --release",
-    "test:napi": "node ./__tests__/index",
     "napi:help": "napi --help",
     "test": "ava",
-    "bench": "node --import @oxc-node/core/register benchmark/bench.ts"
+    "bench": "tsx benchmark/bench.ts"
   },
   "files": [
     "index.js",
@@ -68,7 +68,6 @@
     "@emnapi/runtime": "^1.5.0",
     "emnapi": "^1.5.0",
     "tinybench": "^6.0.0",
-    "@oxc-node/core": "^0.0.35",
     "@taplo/cli": "^0.7.0",
     "@tybys/wasm-util": "^0.10.0",
     "ava": "^6.4.1"
@@ -81,10 +80,6 @@
     "workerThreads": false,
     "environmentVariables": {
       "TS_NODE_PROJECT": "./tsconfig.json"
-    },
-    "nodeArguments": [
-      "--import",
-      "@oxc-node/core/register"
-    ]
+    }
   }
 }

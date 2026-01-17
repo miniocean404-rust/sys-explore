@@ -24,6 +24,9 @@ bench.add("Native getTargetTriple", () => {
   getTargetTriple()
 })
 
-await bench.run()
+async function main() {
+  await bench.run()
+  console.table(bench.table())
+}
 
-console.table(bench.table())
+main()

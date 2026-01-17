@@ -1,5 +1,4 @@
 import test from "ava"
-
 import { getOsExploreInfo, getTargetTriple, initCustomTraceSubscriber, Platform } from "../index.js"
 
 test("getOsExploreInfo 返回正确的应用信息", (t) => {
