@@ -1,12 +1,12 @@
-import { manifestPath, packageJsonPath } from './consts';
-import dedent from 'dedent';
+import { manifestPath, packageJsonPath } from "./consts"
+import dedent from "dedent"
 
 export const defaultBuildOptions = {
   // 构建目标三元组，传递给 `cargo build --target`
   // target: undefined,
 
   // napi 命令执行的工作目录，所有其他路径选项都相对于此路径
-  // cwd: undefined,
+  cwd: process.cwd(),
 
   // `Cargo.toml` 文件路径
   manifestPath,
@@ -43,11 +43,10 @@ export const defaultBuildOptions = {
 
   // 生成的类型定义文件的自定义文件头，仅在启用 `typedef` 功能时有效
   dtsHeader: dedent`
-  // Type definitions for explore
-  // Project: https://github.com/giegie/explore
-  // Definitions by: Giegie <https://github.com/giegie>
-  // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
+    // Type definitions for explore
+    // Project: https://github.com/giegie/explore
+    // Definitions by: Giegie <https://github.com/giegie>
+    // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped\n\n
   `,
 
   // 是否禁用生成的类型定义文件的默认文件头，仅在启用 `typedef` 功能时有效
@@ -72,7 +71,7 @@ export const defaultBuildOptions = {
   bin: undefined,
 
   // 构建指定的库或当前工作目录中的库
-  // package: undefined,
+  package: "binding_explore",
 
   // 使用指定的配置文件构建产物
   // profile: undefined,
@@ -96,5 +95,5 @@ export const defaultBuildOptions = {
   allFeatures: undefined,
 
   // 不激活 `default` 特性
-  noDefaultFeatures: false
+  noDefaultFeatures: false,
 }

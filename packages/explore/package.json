@@ -26,11 +26,8 @@
     "access": "public"
   },
   "scripts": {
-    "build:napi-dev": "napi build --manifest-path ../../Cargo.toml --platform -p binding_explore --js ./index.js --dts ./index.d.ts --target-dir ../../target -o ./",
-    "build:napi": "napi build --manifest-path ../../Cargo.toml --platform -p binding_explore --release -o ./",
-    "prepack": "napi prepublish -p ./npm --tag-style npm --no-gh-release",
-    "artifacts": "napi artifacts -d ../artifacts --npm-dir ./npm",
-    "version": "napi version --npm-dir ./npm",
+    "build:napi-dev": "tsx build/index.ts",
+    "build:napi": "tsx build/index.ts --release",
     "test:napi": "node ./__tests__/index",
     "napi:help": "napi --help"
   },
@@ -41,8 +38,8 @@
     "LICENSE"
   ],
   "dependencies": {
-    "es-toolkit":"1.44.0",
-    "dedent":"1.7.1"
+    "es-toolkit": "1.44.0",
+    "dedent": "1.7.1"
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.5.1",
