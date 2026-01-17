@@ -1,4 +1,2 @@
 node_modules
 /target
-packages/explore/npm
-*.node

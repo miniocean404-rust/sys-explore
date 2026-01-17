@@ -3,6 +3,16 @@
   "license": "MIT",
   "version": "1.0.0",
   "main": "index.js",
+  "types": "index.d.ts",
+  "browser": "browser.js",
+  "keywords": [
+    "napi-rs",
+    "NAPI",
+    "N-API",
+    "Rust",
+    "node-addon",
+    "node-addon-api"
+  ],
   "napi": {
     "binaryName": "explore",
     "package": {
@@ -10,26 +20,34 @@
     },
     "targets": [
       "x86_64-apple-darwin",
-      "x86_64-pc-windows-msvc",
+      "aarch64-apple-darwin",
       "x86_64-unknown-linux-gnu",
+      "x86_64-pc-windows-msvc",
       "x86_64-unknown-linux-musl",
+      "aarch64-unknown-linux-gnu",
       "i686-pc-windows-msvc",
       "armv7-unknown-linux-gnueabihf",
-      "aarch64-unknown-linux-gnu",
-      "aarch64-apple-darwin",
+      "aarch64-linux-android",
+      "x86_64-unknown-freebsd",
       "aarch64-unknown-linux-musl",
-      "aarch64-pc-windows-msvc"
+      "aarch64-pc-windows-msvc",
+      "armv7-linux-androideabi"
     ]
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "engines": {
+    "node": ">= 10.16.0 < 11 || >= 11.8.0 < 12 || >= 12.0.0"
+  },
   "scripts": {
     "build:napi-dev": "tsx build/index.ts",
     "build:napi": "tsx build/index.ts --release",
     "test:napi": "node ./__tests__/index",
-    "napi:help": "napi --help"
+    "napi:help": "napi --help",
+    "test": "ava",
+    "bench": "node --import @oxc-node/core/register benchmark/bench.ts"
   },
   "files": [
     "index.js",
@@ -44,6 +62,29 @@
   "devDependencies": {
     "@napi-rs/cli": "^3.5.1",
     "@types/node": "25.0.9",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "@napi-rs/wasm-runtime": "^1.0.4",
+    "@emnapi/core": "^1.5.0",
+    "@emnapi/runtime": "^1.5.0",
+    "emnapi": "^1.5.0",
+    "tinybench": "^6.0.0",
+    "@oxc-node/core": "^0.0.35",
+    "@taplo/cli": "^0.7.0",
+    "@tybys/wasm-util": "^0.10.0",
+    "ava": "^6.4.1"
+  },
+  "ava": {
+    "extensions": {
+      "ts": "module"
+    },
+    "timeout": "2m",
+    "workerThreads": false,
+    "environmentVariables": {
+      "TS_NODE_PROJECT": "./tsconfig.json"
+    },
+    "nodeArguments": [
+      "--import",
+      "@oxc-node/core/register"
+    ]
   }
 }

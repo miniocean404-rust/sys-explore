@@ -46,5 +46,5 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true
   },
-  "include": ["__tests__/*"],
+  "include": ["__tests__/*", "build"]
 }

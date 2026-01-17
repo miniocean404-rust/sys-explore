@@ -1,3 +1,3 @@
-import type { buildOptions } from '.';
+import type { buildOptions } from "."
 
-export type BuildOptions = typeof buildOptions
+export type BuildOptions = typeof buildOptions & { cargoOptions?: string[] }

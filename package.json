@@ -1,0 +1,22 @@
+{
+  "name": "sys-explore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "run-p format:rs format:toml",
+    "format:toml": "taplo format",
+    "format:rs": "cargo fmt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.27.0",
+  "dependencies": {
+    "es-toolkit": "1.44.0",
+    "dedent": "1.7.1"
+  },
+  "devDependencies": {
+    "@taplo/cli": "^0.7.0"
+  }
+}

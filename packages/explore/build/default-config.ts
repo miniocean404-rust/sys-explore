@@ -65,7 +65,7 @@ export const defaultBuildOptions = {
   release: false,
 
   // 详细输出构建命令跟踪信息
-  verbose: false,
+  verbose: true,
 
   // 仅构建指定的二进制文件
   bin: undefined,
@@ -96,4 +96,7 @@ export const defaultBuildOptions = {
 
   // 不激活 `default` 特性
   noDefaultFeatures: false,
+
+  // 额外的 cargo 命令参数
+  cargoOptions: [],
 }
