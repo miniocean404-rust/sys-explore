@@ -72,16 +72,40 @@ cargo package --list
 
 ### 步骤 4: 发布
 
-运行以下命令将包发布到 crates.io：
+#### 情况 A：独立包发布
+
+如果你的项目不是 Workspace，运行以下命令：
 
 ```bash
 cargo publish
 ```
 
-Cargo 会先打包你的项目，验证依赖，并上传到 crates.io。如果是首次发布，crates.io 会立即注册该包名。
+#### 情况 B：Workspace 中的包发布（推荐）
+
+内部 crate 必须指定 version 才能支持发布依赖
+
+```toml
+[workspace.dependencies]
+# 内部 crate 必须指定 version 才能支持发布依赖
+binding = { path = "./crates/binding", version = "0.1.0" }
+sys-file-manager-path = { path = "./crates/sys-file-manager-path", version = "0.1.0" }
+```
+
+在 Workspace 根目录下，通过 `-p` 参数指定要发布的包名：
+
+```bash
+# 发布 sys-file-manager-path
+cargo publish -p sys-file-manager-path
+
+# 发布 binding（如果它依赖了 sys-file-manager-path，需先发布后者）
+cargo publish -p binding_explore
+```
+
+Cargo 会自动解析 `workspace.package` 继承的元数据，并将其填充到生成的发布包中。
 
 ## 4. 常见问题
 
-- **Dry Run**: 如果你想模拟发布过程而不实际上传，可以使用 `cargo publish --dry-run`。
+- **Dry Run**: 如果你想模拟发布过程而不实际上传，可以使用 `cargo publish -p <name> --dry-run`。
+- **依赖顺序**: 如果 A 包依赖 B 包，必须**先发布 B，再发布 A**。
+- **版本一致性**: 在 Workspace 中，建议在根目录 `Cargo.toml` 的 `[workspace.dependencies]` 中明确指定版本号。
 - **撤销发布**: 发布后的版本**不能删除**，这是为了保证依赖该版本的项目不会破坏。但你可以使用 `cargo yank --vers <version>` 撤回某个版本，阻止新项目依赖它。
-- **工作区 (Workspace)**: 如果你在一个包含多个 crate 的工作区中，需要分别进入每个 crate 的目录进行发布，或者使用脚本按依赖顺序发布。
