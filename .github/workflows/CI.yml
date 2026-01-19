@@ -16,8 +16,9 @@ permissions:
 
 on:
   push:
-    branches:
-      - master
+    # 暂时注释
+    # branches:
+    #   - master
     tags-ignore:
       - "**"
     paths-ignore:
