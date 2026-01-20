@@ -1,5 +1,9 @@
 [target.x86_64-pc-windows-msvc]
-rustflags = ["-C", "target-feature=+crt-static"]
+# rustflags = ["-C", "target-feature=+crt-static"]
+# 使用 lld 链接器加速编译,来自: https://mp.weixin.qq.com/s?__biz=MzI1OTIzNDIxNg==&mid=2247488225&idx=2&sn=fe2f7a4051cbc908b640d8bea728e0da&chksm=ebb08a3d0521020062ace625799a05bbe472d44795b4ffd20d8dc6c5f6bca48e679a8b7c3617&mpshare=1&scene=1&srcid=0120KsqVSfRb6HMyPPD0dBJI&sharer_shareinfo=6f81aa7fc9d811e636c9b228289bcd58&sharer_shareinfo_first=6f81aa7fc9d811e636c9b228289bcd58#rd
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 [target.i686-pc-windows-msvc]
-rustflags = ["-C", "target-feature=+crt-static"]
+# rustflags = ["-C", "target-feature=+crt-static"]
+# 使用 lld 链接器加速编译
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
